@@ -1,24 +1,21 @@
 package com.android.game.fight_zombies.ui;
 
+import android.util.Log;
+import android.view.MotionEvent;
+
 import com.android.game.fight_zombies.tools.Textures;
-import com.stickycoding.rokon.GameObject;
-import com.stickycoding.rokon.Scene;
+import com.stickycoding.rokon.RokonActivity;
 import com.stickycoding.rokon.background.FixedBackground;
 
-public class BeginScene extends Scene{
+public class BeginScene extends GameScene{
 
-    private FixedBackground background; 
+    private FixedBackground background;
 
-    public BeginScene () {
-        super();
+    public BeginScene (RokonActivity activity) {
+        super(activity);
 
-        Textures textures = Textures.getInstance();
-        background = new FixedBackground(textures.getBackground());
+        background = new FixedBackground(Textures.begin_background);
         setBackground(background);
-
-        GameObject bg = new GameObject(0, 0, 320, 480);
-        bg.setTexture(textures.getBackground());
-        add(bg);
     }
 
     @Override
@@ -39,6 +36,18 @@ public class BeginScene extends Scene{
     @Override
     public void onReady() {
         
+    }
+
+    @Override
+    protected void handleTouch(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            if (getActivity() != null) {
+                Log.e("@@@@", "BeginScene");
+                ShowScence scene = new ShowScence(this.getActivity());
+                getActivity().setScene(scene);
+            }
+        }
+        super.handleTouch(event);
     }
 
 }

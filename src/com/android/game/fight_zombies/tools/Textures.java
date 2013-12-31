@@ -6,31 +6,28 @@ import com.stickycoding.rokon.TextureAtlas;
 /*
  * @autor Cap
  * 这是一个地图集类
- * 这里使用单例模式
  */
 public class Textures {
 
-    private static Textures sIntance = null;
-    private static TextureAtlas atlas = null;
-    private static Texture background; /*texture 是Rockon 的图片类*/
+    public static TextureAtlas atlas = null;
+    public static Texture show_background; /*texture 是Rockon 的图片类*/
+    public static Texture menu_background;
+    public static Texture begin_background;
+    public static Texture bob;
 
-    public static Textures getInstance() {
-        if (sIntance == null) {
-            sIntance = new Textures();
-        }
-        return sIntance;
-    }
-
-    public void load(String filename) {
+    public static void load() {
         if (atlas == null) {
             atlas = new TextureAtlas();
+            show_background = new Texture("show_background.png");
+            atlas.insert(show_background);
+            menu_background = new Texture("menu_background.png");
+            atlas.insert(menu_background);
+            begin_background = new Texture("begin_background.png");
+            atlas.insert(begin_background);
+            bob = new Texture("bob.png");
+            atlas.insert(bob);
+            atlas.complete();
         }
-        background = new Texture(filename);
-        atlas.insert(background);
-        atlas.complete();
     }
 
-    public Texture getBackground() {
-        return background;
-    }
 }
